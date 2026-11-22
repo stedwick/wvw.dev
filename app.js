@@ -17,6 +17,8 @@
   const icons = {
     discover: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
     macos: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    ios: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`,
+    android: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="9" width="14" height="11" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/><line x1="9" y1="5" x2="7" y2="2"/><line x1="15" y1="5" x2="17" y2="2"/><circle cx="9" cy="6" r="0.5" fill="currentColor"/><circle cx="15" cy="6" r="0.5" fill="currentColor"/></svg>`,
     web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     "developer-tools": `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
     cli: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>`,
@@ -45,6 +47,7 @@
     medical: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`,
     stores: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
     github: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>`,
+    request: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
   };
 
   const cardGradientsDark = [
@@ -71,10 +74,24 @@
       : cardGradientsDark;
   }
 
+  function sortApps(apps) {
+    return [...apps].sort((a, b) => {
+      const starsA = a.stars || 0, starsB = b.stars || 0;
+      if (starsB !== starsA) return starsB - starsA;
+      const iconA = a.icon ? 1 : 0, iconB = b.icon ? 1 : 0;
+      if (iconB !== iconA) return iconB - iconA;
+      return (a.name || "").localeCompare(b.name || "");
+    });
+  }
+
   function formatNumber(n) {
     if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
     if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
     return String(n);
+  }
+
+  function appIconSrc(app) {
+    return app._generatedIcon || app.icon || null;
   }
 
   function iconStyle(app) {
@@ -82,6 +99,7 @@
     const parts = [];
     if (s.scale) parts.push(`transform:scale(${s.scale})`);
     if (s.objectFit) parts.push(`object-fit:${s.objectFit}`);
+    if (s.objectPosition) parts.push(`object-position:${s.objectPosition}`);
     if (s.padding) parts.push(`padding:${s.padding}`);
     return parts.join(";");
   }
@@ -95,10 +113,14 @@
   }
 
   function renderIcon(app) {
-    if (app.icon) {
-      const imgSt = iconStyle(app);
+    const src = appIconSrc(app);
+    if (src) {
+      const s = app.iconStyle || {};
+      const imgSt = app._generatedIcon
+        ? `object-fit:cover;border-radius:22%${s.objectPosition ? ";object-position:" + s.objectPosition : ""}${s.scale ? ";transform:scale(" + s.scale + ")" : ""}`
+        : iconStyle(app);
       const st = imgSt ? ` style="${imgSt}"` : "";
-      return `<img src="${app.icon}" alt="${app.name}"${st} onerror="this.parentElement.innerHTML='${app.iconEmoji || "📦"}'">`;
+      return `<img src="${src}" alt="${app.name}"${st} onerror="this.parentElement.innerHTML='${app.iconEmoji || "📦"}'">`;
     }
     return app.iconEmoji || "📦";
   }
@@ -125,6 +147,150 @@
     return `<span class="owner-badge">${label}</span>`;
   }
 
+  function isPaidApp(app) {
+    return app.price && app.price !== "Free" && app.price !== "free";
+  }
+
+  function getBuyUrl(app) {
+    return app.buyUrl || app.homepage || app.github;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    const intervals = [
+      { label: "y", seconds: 31536000 },
+      { label: "mo", seconds: 2592000 },
+      { label: "w", seconds: 604800 },
+      { label: "d", seconds: 86400 },
+      { label: "h", seconds: 3600 },
+      { label: "m", seconds: 60 },
+    ];
+    for (const i of intervals) {
+      const count = Math.floor(seconds / i.seconds);
+      if (count >= 1) return count + i.label + " ago";
+    }
+    return "just now";
+  }
+
+  function renderReviews(app) {
+    const comments = app._comments || [];
+    const hasGithub = app.github && app.github.includes("github.com");
+    if (comments.length === 0 && !hasGithub) return "";
+
+    const issuesUrl = hasGithub ? app.github + "/issues?q=%5Bwvw%5D" : "";
+    const newIssueUrl = hasGithub ? app.github + "/issues/new?title=" + encodeURIComponent("[wvw]: ") : "";
+
+    const clickToRate = hasGithub ? `
+      <div class="reviews-actions">
+        <div class="click-to-rate">
+          <span class="click-to-rate-label">Click to Rate:</span>
+          <a href="${newIssueUrl}" target="_blank" rel="noopener" class="rate-stars">
+            ${[1, 2, 3, 4, 5].map(() => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`).join("")}
+          </a>
+        </div>
+        <div class="review-links">
+          <a href="${newIssueUrl}" target="_blank" rel="noopener" class="review-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Write a Review
+          </a>
+          <a href="${issuesUrl}" target="_blank" rel="noopener" class="review-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 17h.01"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/></svg>
+            App Support
+          </a>
+        </div>
+      </div>` : "";
+
+    const reactionEmojis = { thumbsUp: "\u{1F44D}", thumbsDown: "\u{1F44E}", laugh: "\u{1F604}", hooray: "\u{1F389}", confused: "\u{1F615}", heart: "\u2764\uFE0F", rocket: "\u{1F680}", eyes: "\u{1F440}" };
+
+    const reviewCards = comments.map((c) => {
+      const timeAgo = getTimeAgo(new Date(c.created_at));
+      const body = escapeHtml(c.body || "");
+      const truncated = body.length > 200 ? body.substring(0, 200) + "\u2026" : body;
+      const reactions = c.reactions ? Object.entries(reactionEmojis)
+        .filter(([key]) => c.reactions[key] > 0)
+        .map(([key, emoji]) => `<span class="review-reaction">${emoji} ${c.reactions[key]}</span>`)
+        .join("") : "";
+
+      return `
+        <div class="review-card">
+          <div class="review-card-header">
+            <img class="review-avatar" src="${c.avatar}" alt="" onerror="this.style.display='none'">
+            <div class="review-header-info">
+              <span class="review-author">${escapeHtml(c.user)}</span>
+              <span class="review-time">${timeAgo}</span>
+            </div>
+          </div>
+          <div class="review-card-title">${escapeHtml(c.title)}</div>
+          <div class="review-card-body">${truncated}</div>
+          ${reactions ? `<div class="review-reactions">${reactions}</div>` : ""}
+          ${c.url ? `<a href="${c.url}" target="_blank" rel="noopener" class="review-more">more</a>` : ""}
+        </div>`;
+    }).join("");
+
+    return `
+      <div class="detail-section reviews-section">
+        <div class="section-header">
+          <h3 style="font-size:22px;margin-bottom:0">Ratings &amp; Reviews</h3>
+          ${hasGithub ? `<a href="${issuesUrl}" target="_blank" rel="noopener" class="see-all-link">See All</a>` : ""}
+        </div>
+        ${clickToRate}
+        ${reviewCards ? `
+        <div class="review-cards-wrapper">
+          <button class="review-scroll-btn review-scroll-left" aria-label="Scroll left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="review-cards">${reviewCards}</div>
+          <button class="review-scroll-btn review-scroll-right" aria-label="Scroll right">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 6 15 12 9 18"/></svg>
+          </button>
+        </div>` : ""}
+      </div>`;
+  }
+
+  function getButtonLabel(app) {
+    if (isPaidApp(app)) return app.price;
+    if (app.brew || app.downloadUrl || app.installCommand) return "Get";
+    return "View";
+  }
+  function getAppDeveloperLabel(app) {
+    return app.developer || app._developer || app._owner || app._store || data.store.developer;
+  }
+
+  function getAppPublisherTerms(app) {
+    return [app.developer, app._developer, app._owner, data.store.developer]
+      .filter(Boolean)
+      .map((value) => value.toLowerCase());
+  }
+
+  function getPublisherMatchType(app, query) {
+    if (!query) return 0;
+    const terms = getAppPublisherTerms(app);
+    if (terms.some((value) => value === query)) return 2;
+    if (terms.some((value) => value.includes(query))) return 1;
+    return 0;
+  }
+
+  function matchesSearchText(app, query) {
+    if (!query) return true;
+    return (
+      app.name.toLowerCase().includes(query) ||
+      app.subtitle.toLowerCase().includes(query) ||
+      app.description.toLowerCase().includes(query) ||
+      (app.features && app.features.some((f) => f.toLowerCase().includes(query)))
+    );
+  }
+
+  function parseSearchQuery(query) {
+    const byMatch = query.match(/(?:^|\s)by:(?:"([^"]+)"|(.+?))(?=\s+\w+:|$)/i);
+    const publisherQuery = byMatch ? (byMatch[1] || byMatch[2] || "").trim().toLowerCase() : "";
+    const textQuery = (byMatch ? query.replace(byMatch[0], " ") : query).trim().toLowerCase();
+    return { publisherQuery, textQuery };
+  }
+
   function appRow(app) {
     return `
       <div class="app-row" data-app="${app.id}">
@@ -137,23 +303,24 @@
             ${app.stars ? starBadge(app.stars) : ""}
           </div>
         </div>
-        <button class="get-btn" data-action="get" data-app="${app.id}">${app.brew ? "Get" : app.installCommand ? "Get" : "View"}</button>
+        <button class="get-btn${isPaidApp(app) ? " buy-btn" : ""}" data-action="get" data-app="${app.id}">${getButtonLabel(app)}</button>
       </div>`;
   }
 
   function appCard(app, index) {
     const grads = getCardGradients();
     const g = grads[index % grads.length];
-    const hasScreenshot = app.screenshots && app.screenshots.length > 0;
-    const screenshotImg = hasScreenshot
-      ? smartMedia(app.screenshots[0], "card-screenshot", app.name)
-      : "";
+    const showcasePick = showcaseData ? (showcaseData.picks || []).find((p) => p.id === app.id && p.showcase_image) : null;
+    const hasScreenshot = showcasePick || (app.screenshots && app.screenshots.length > 0);
+    const screenshotImg = showcasePick
+      ? `<img class="card-screenshot" src="${showcasePick.showcase_image}" alt="${app.name}" loading="lazy">`
+      : (app.screenshots && app.screenshots.length > 0 ? smartMedia(app.screenshots[0], "card-screenshot", app.name) : "");
     return `
       <div class="card" data-app="${app.id}">
         <div class="card-image">
           <div class="card-image-bg" style="background:linear-gradient(135deg, ${g[0]}, ${g[1]}, ${g[2]})">
             ${screenshotImg}
-            <div class="card-icon-fallback">${app.icon ? `<img src="${app.icon}" style="width:80px;height:80px;border-radius:18px;${iconStyle(app)}" onerror="this.outerHTML='📦'">` : (app.iconEmoji || "📦")}</div>
+            <div class="card-icon-fallback">${(() => { const s = app.iconStyle || {}; const src = appIconSrc(app); return src ? `<img src="${src}" style="width:80px;height:80px;border-radius:18px;object-fit:cover${s.objectPosition ? ";object-position:" + s.objectPosition : ""}${s.scale ? ";transform:scale(" + s.scale + ")" : ""}" onerror="this.outerHTML='📦'">` : (app.iconEmoji || "📦"); })()}</div>
           </div>
         </div>
         <div class="card-body">
@@ -204,8 +371,12 @@
 
   function renderFeaturedBanner(f) {
     const app = data.apps.find((a) => a.id === f.id);
+    const showcasePick = showcaseData ? (showcaseData.picks || []).find((p) => p.id === f.id && p.showcase_image) : null;
+    const bgStyle = showcasePick
+      ? `style="background-image:url('${showcasePick.showcase_image}');background-size:cover;background-position:center"`
+      : "";
     return `
-      <div class="featured-banner" data-app="${f.id}">
+      <div class="featured-banner" data-app="${f.id}" ${bgStyle}>
         <div class="featured-content">
           <div class="featured-label">${f.headline}</div>
           <div class="featured-title">${f.title}</div>
@@ -217,34 +388,68 @@
               <div class="featured-app-name">${app.name}</div>
               <div class="featured-app-sub">${app.subtitle}</div>
             </div>
-            <button class="featured-get-btn" data-action="get" data-app="${app.id}">Get</button>
+            <button class="featured-get-btn${isPaidApp(app) ? " buy-btn" : ""}" data-action="get" data-app="${app.id}">${getButtonLabel(app)}</button>
           </div>` : ""}
         </div>
       </div>`;
   }
 
   function pickMustTry(apps, count) {
-    const withScreenshots = apps.filter((a) => a.screenshots && a.screenshots.length > 0);
-    const without = apps.filter((a) => !a.screenshots || a.screenshots.length === 0);
-    const stores = [...new Set(withScreenshots.map((a) => a._source))];
+    const featuredIds = new Set((Array.isArray(data.featured) ? data.featured : []).map((f) => f.id));
+    const showcaseIds = new Set(showcaseData ? (showcaseData.picks || []).filter((p) => p.showcase_image).map((p) => p.id) : []);
+
+    const scored = apps.map((a) => {
+      let score = 0;
+      if (showcaseIds.has(a.id)) score += 50;
+      if (a.screenshots && a.screenshots.length > 0) score += 30;
+      if (a.icon) score += 10;
+      if (a.features && a.features.length > 0) score += 5;
+      if (a.longDescription) score += 5;
+      score += Math.min(Math.log10((a.stars || 0) + 1) * 10, 40);
+      if (featuredIds.has(a.id)) score -= 20;
+      return { app: a, score };
+    }).sort((a, b) => b.score - a.score);
+
     const picked = [];
-    const usedIds = new Set();
-    stores.forEach((store) => {
-      const fromStore = withScreenshots.filter((a) => a._source === store && !usedIds.has(a.id));
-      if (fromStore.length > 0) {
-        picked.push(fromStore[0]);
-        usedIds.add(fromStore[0].id);
+    const usedStores = new Set();
+    const usedCategories = new Set();
+
+    for (const { app } of scored) {
+      if (picked.length >= count) break;
+      const dominated = usedStores.has(app._source) && app.category.every((c) => usedCategories.has(c));
+      if (dominated && picked.length >= 2) continue;
+      picked.push(app);
+      usedStores.add(app._source);
+      (app.category || []).forEach((c) => usedCategories.add(c));
+    }
+
+    if (picked.length < count) {
+      for (const { app } of scored) {
+        if (picked.length >= count) break;
+        if (!picked.includes(app)) picked.push(app);
       }
-    });
-    withScreenshots.forEach((a) => {
-      if (picked.length >= count) return;
-      if (!usedIds.has(a.id)) { picked.push(a); usedIds.add(a.id); }
-    });
-    without.forEach((a) => {
-      if (picked.length >= count) return;
-      if (!usedIds.has(a.id)) { picked.push(a); usedIds.add(a.id); }
-    });
+    }
+
     return picked.slice(0, count);
+  }
+
+  function showcaseCard(pick) {
+    const app = data.apps.find((a) => a.id === pick.id);
+    if (!app) return "";
+    const bgImg = pick.showcase_image || pick.screenshot;
+    const bg = bgImg
+      ? `background-image:url('${bgImg}');background-size:cover;background-position:center`
+      : `background:linear-gradient(135deg, ${getCardGradients()[0].join(", ")})`;
+    return `
+      <div class="showcase-card" data-app="${pick.id}" style="${bg}">
+        <div class="showcase-overlay">
+          <div class="showcase-card-icon">${(() => { const s = app.iconStyle || {}; const src = appIconSrc(app); return src ? `<img src="${src}" style="width:40px;height:40px;border-radius:10px;object-fit:cover${s.objectPosition ? ";object-position:" + s.objectPosition : ""}${s.scale ? ";transform:scale(" + s.scale + ")" : ""}" onerror="this.outerHTML='${app.iconEmoji || "📦"}'">` : (app.iconEmoji || "📦"); })()}</div>
+          <div class="showcase-card-info">
+            <div class="showcase-card-name">${app.name}</div>
+            <div class="showcase-card-sub">${app.subtitle}</div>
+          </div>
+        </div>
+      </div>`;
   }
 
   // Discover Page
@@ -261,6 +466,7 @@
       : "";
 
     let html = `
+      <div class="mobile-page-title">World Vibe Web</div>
       <div class="carousel">
         <div class="carousel-track">
           ${featuredList.map((f) => renderFeaturedBanner(f)).join("")}
@@ -273,9 +479,23 @@
           <h2>Best New Apps and Updates</h2>
         </div>
         <div class="app-list">
-          ${apps.slice(0, 6).map((a) => appRow(a)).join("")}
+          ${sortApps(apps).slice(0, 6).map((a) => appRow(a)).join("")}
         </div>
       </div>
+
+      ${(() => {
+        const paidApps = apps.filter((a) => isPaidApp(a));
+        if (paidApps.length === 0) return "";
+        return `
+      <div class="section">
+        <div class="section-header">
+          <h2>Best Paid Apps</h2>
+        </div>
+        <div class="app-list">
+          ${sortApps(paidApps).map((a) => appRow(a)).join("")}
+        </div>
+      </div>`;
+      })()}
 
       <div class="section">
         <div class="section-header">
@@ -289,14 +509,19 @@
       ${activeCats.map((cat) => {
         const catApps = apps.filter((a) => a.category && a.category.includes(cat.id));
         const showAll = catApps.length > 6;
+        const picks = showcaseData ? (showcaseData.picks || []).filter((p) => p.category === cat.id) : [];
         return `
       <div class="section">
         <div class="section-header">
           <h2>${cat.name}</h2>
           ${showAll ? `<span class="see-all" data-view="${cat.id}">See All</span>` : ""}
         </div>
+        ${picks.length > 0 ? `
+        <div class="showcase-picks">
+          ${picks.map((p) => showcaseCard(p)).join("")}
+        </div>` : ""}
         <div class="app-list">
-          ${catApps.slice(0, 6).map((a) => appRow(a)).join("")}
+          ${sortApps(catApps).slice(0, 6).map((a) => appRow(a)).join("")}
         </div>
       </div>`;
       }).join("")}
@@ -320,10 +545,16 @@
         </div>`;
     }
 
+    const picks = showcaseData ? (showcaseData.picks || []).filter((p) => p.category === categoryId) : [];
+
     return `
       <div class="page-header"><h1>${cat ? cat.name : "Category"}</h1></div>
+      ${picks.length > 0 ? `
+      <div class="showcase-picks" style="margin-bottom:20px">
+        ${picks.map((p) => showcaseCard(p)).join("")}
+      </div>` : ""}
       <div class="app-list">
-        ${apps.map((a) => appRow(a)).join("")}
+        ${sortApps(apps).map((a) => appRow(a)).join("")}
       </div>`;
   }
 
@@ -346,12 +577,15 @@
             ${app._owner ? `<div class="app-detail-owner">by <a href="https://github.com/${app._owner}" target="_blank" rel="noopener">${app._owner}</a></div>` : ""}
             <div class="app-detail-subtitle">${app.subtitle}</div>
             <div class="app-detail-actions">
-              <button class="app-detail-get-btn" data-action="get" data-app="${app.id}">
-                ${app.brew || app.downloadUrl ? "Get" : app.installCommand ? "Get" : "View"}
+              <button class="app-detail-get-btn${isPaidApp(app) ? " buy-btn" : ""}" data-action="get" data-app="${app.id}">
+                ${getButtonLabel(app)}
               </button>
               <a href="${app.github}" target="_blank" rel="noopener" class="github-link">
                 ${icons.github} View on GitHub
               </a>
+              <button class="share-btn" data-action="share" aria-label="Share">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              </button>
             </div>
           </div>
         </div>
@@ -409,6 +643,8 @@
           </div>
         </div>` : ""}
 
+        ${renderReviews(app)}
+
         <div class="detail-section">
           <h3>Information</h3>
           <div class="info-grid">
@@ -447,19 +683,76 @@
             </div>` : ""}
           </div>
         </div>
+
+        <div class="detail-section security-section">
+          <h3>App Security</h3>
+          <div class="security-notice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="security-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <p>This app may be <strong>vibe-coded</strong> — possibly built with AI-assisted development. While the source code is open and available on GitHub, World Vibe Web does not audit, verify, or guarantee the safety of any listed app.</p>
+              <p>Before installing, review the source code yourself${app.github ? ` at <a href="${app.github}" target="_blank" rel="noopener">${app.github.replace("https://github.com/", "")}</a>` : ""}. Run apps in sandboxed environments when possible. <strong>Install at your own risk.</strong></p>
+            </div>
+          </div>
+        </div>
+
+        ${(() => {
+        const relatedBySource = data.apps.filter(
+          (a) => a.id !== app.id && a._source && app._source && a._source === app._source
+        );
+        const sameStore = relatedBySource.slice(0, 6);
+        const hasStorePage = app._source && storesData.some((store) => store.source === app._source);
+        if (sameStore.length === 0) return "";
+        return `
+        <div class="detail-section">
+          <div class="section-header">
+            <h3 style="font-size:22px;margin-bottom:0">More by ${getAppDeveloperLabel(app)}</h3>
+            ${hasStorePage && relatedBySource.length > sameStore.length ? `<button class="see-all-link" type="button" data-store="${encodeURIComponent(app._source)}">See All</button>` : ""}
+          </div>
+          <div class="app-list">
+            ${sameStore.map((a) => appRow(a)).join("")}
+          </div>
+        </div>`;
+      })()}
+
+        ${(() => {
+        const related = data.apps.filter(
+          (a) => a.id !== app.id &&
+            a.category && app.category &&
+            a.category.some((c) => app.category.includes(c))
+        ).slice(0, 6);
+        if (related.length === 0) return "";
+        return `
+        <div class="detail-section">
+          <div class="section-header">
+            <h3 style="font-size:22px;margin-bottom:0">You Might Also Like</h3>
+          </div>
+          <div class="app-list">
+            ${related.map((a) => appRow(a)).join("")}
+          </div>
+        </div>`;
+      })()}
       </div>`;
   }
 
   // Search results
   function renderSearch(query) {
-    const q = query.toLowerCase();
-    const results = data.apps.filter(
-      (a) =>
-        a.name.toLowerCase().includes(q) ||
-        a.subtitle.toLowerCase().includes(q) ||
-        a.description.toLowerCase().includes(q) ||
-        (a.features && a.features.some((f) => f.toLowerCase().includes(q)))
-    );
+    const { publisherQuery, textQuery } = parseSearchQuery(query);
+    const matchingApps = data.apps
+      .map((app) => ({
+        app,
+        publisherMatchType: publisherQuery ? getPublisherMatchType(app, publisherQuery) : 0,
+      }))
+      .filter(({ app, publisherMatchType }) =>
+        (!publisherQuery || publisherMatchType > 0) && matchesSearchText(app, textQuery)
+      );
+
+    const exactPublisherMatches = publisherQuery
+      ? matchingApps.filter(({ publisherMatchType }) => publisherMatchType === 2).map(({ app }) => app)
+      : [];
+    const partialPublisherMatches = publisherQuery
+      ? matchingApps.filter(({ publisherMatchType }) => publisherMatchType === 1).map(({ app }) => app)
+      : [];
+    const results = !publisherQuery ? matchingApps.map(({ app }) => app) : exactPublisherMatches.concat(partialPublisherMatches);
 
     if (results.length === 0) {
       return `
@@ -473,9 +766,22 @@
 
     return `
       <div class="page-header"><h1>Search: "${query}"</h1></div>
+      ${publisherQuery ? `
+      <div class="app-list">
+        ${exactPublisherMatches.map((a) => appRow(a)).join("")}
+      </div>
+      ${partialPublisherMatches.length > 0 ? `
+      <div class="section">
+        <div class="section-header">
+          <h2>Related Publisher Matches</h2>
+        </div>
+        <div class="app-list">
+          ${partialPublisherMatches.map((a) => appRow(a)).join("")}
+        </div>
+      </div>` : ""}` : `
       <div class="app-list">
         ${results.map((a) => appRow(a)).join("")}
-      </div>`;
+      </div>`}`;
   }
 
   // Stores Page
@@ -490,23 +796,40 @@
         </div>`;
     }
 
+    const totalApps = data.apps ? data.apps.length : 0;
+    const totalStars = storesData.reduce((sum, s) => sum + s.totalStars, 0);
+
     return `
       <div class="page-header"><h1>Stores</h1></div>
+      <div class="stores-overview">
+        <div class="stores-overview-stat">
+          <div class="stores-overview-value">${storesData.length}</div>
+          <div class="stores-overview-label">Stores</div>
+        </div>
+        <div class="stores-overview-stat">
+          <div class="stores-overview-value">${totalApps}</div>
+          <div class="stores-overview-label">Apps</div>
+        </div>
+        <div class="stores-overview-stat">
+          <div class="stores-overview-value">${formatNumber(totalStars)}</div>
+          <div class="stores-overview-label">Stars</div>
+        </div>
+      </div>
       <p style="color:var(--text-secondary);font-size:14px;margin-bottom:24px;line-height:1.5">
         World Vibe Web aggregates apps from independent stores. Each store maintains its own <code style="font-size:12px;background:var(--bg-tertiary);padding:2px 6px;border-radius:4px">apps.json</code> and contributes to the unified catalog.
       </p>
       <div class="stores-list">
         ${storesData.map((s) => {
-          const iconStack = (s.icons || []).slice(0, 4).map((ic, i) =>
-            `<img src="${ic.icon}" class="store-stack-icon" style="z-index:${4-i};margin-left:${i ? '-10px' : '0'};${ic.iconStyle && ic.iconStyle.borderRadius ? 'border-radius:'+ic.iconStyle.borderRadius : 'border-radius:22%'}" onerror="this.style.display='none'">`
-          ).join("");
-          const fallbackAvatar = !s.icons || s.icons.length === 0
-            ? `<div class="store-card-avatar-letter">${s.name.charAt(0).toUpperCase()}</div>` : "";
-          const isUrl = s.source.startsWith("http");
-          const sourceLink = isUrl ? s.source : `https://github.com/${s.source}`;
-          const sourceLabel = isUrl ? s.source.replace(/^https?:\/\//, "").replace(/\/+$/, "") : s.owner;
-          return `
-          <div class="store-card">
+      const iconStack = (s.icons || []).slice(0, 4).map((ic, i) =>
+        `<img src="${ic.icon}" class="store-stack-icon" style="z-index:${4 - i};margin-left:${i ? '-10px' : '0'};${ic.iconStyle && ic.iconStyle.borderRadius ? 'border-radius:' + ic.iconStyle.borderRadius : 'border-radius:22%'}" onerror="this.style.display='none'">`
+      ).join("");
+      const fallbackAvatar = !s.icons || s.icons.length === 0
+        ? `<div class="store-card-avatar-letter">${s.name.charAt(0).toUpperCase()}</div>` : "";
+      const isUrl = s.source.startsWith("http");
+      const sourceLink = isUrl ? s.source : `https://github.com/${s.source}`;
+      const sourceLabel = isUrl ? s.source.replace(/^https?:\/\//, "").replace(/\/+$/, "") : s.owner;
+      return `
+          <div class="store-card" data-store="${encodeURIComponent(s.source)}" style="cursor:pointer">
             <div class="store-card-header">
               <div class="store-icon-stack">${iconStack}${fallbackAvatar}</div>
               <div class="store-card-info">
@@ -523,28 +846,182 @@
               <a href="${sourceLink}" target="_blank" rel="noopener" class="store-card-btn secondary">${icons.github} View Repo</a>
             </div>
           </div>`;
-        }).join("")}
+    }).join("")}
+      </div>`;
+  }
+
+  // App Requests Page
+  function renderRequests() {
+    const requestUrl = "https://github.com/f/wvw.dev/issues?q=is%3Aissue+label%3Aapp-request";
+    const newRequestUrl = "https://github.com/f/wvw.dev/issues/new?template=app-request.yml";
+
+    return `
+      <div class="page-header"><h1>App Requests</h1></div>
+      <p style="color:var(--text-secondary);font-size:14px;margin-bottom:24px;line-height:1.5">
+        Can't find an app on WVW? Request it here. The community and maintainers will review requests and help get apps listed.
+      </p>
+      <div style="display:flex;gap:10px;margin-bottom:32px">
+        <a href="${newRequestUrl}" target="_blank" rel="noopener" class="store-card-btn primary" style="padding:10px 20px;font-size:14px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Request an App
+        </a>
+        <a href="${requestUrl}" target="_blank" rel="noopener" class="store-card-btn secondary" style="padding:10px 20px;font-size:14px">
+          ${icons.github} View All Requests
+        </a>
+      </div>
+      <div class="requests-info">
+        <div class="requests-info-card">
+          <div class="requests-info-icon">1</div>
+          <h4>Submit a Request</h4>
+          <p>Fill out the form with the app name, GitHub URL, platform, and why it should be listed.</p>
+        </div>
+        <div class="requests-info-card">
+          <div class="requests-info-icon">2</div>
+          <h4>Someone Vibecodes It</h4>
+          <p>A developer from the community picks up the request and vibecodes the app into existence.</p>
+        </div>
+        <div class="requests-info-card">
+          <div class="requests-info-icon">3</div>
+          <h4>App Gets Listed</h4>
+          <p>The app developer or a contributor adds the app's store to WVW.</p>
+        </div>
+      </div>`;
+  }
+
+  // Store Detail Page
+  function renderStoreDetail(storeSource) {
+    const store = storesData.find((s) => s.source === storeSource);
+    if (!store) return `<div class="empty-state"><div class="empty-state-icon">🏪</div><h3>Store not found</h3></div>`;
+
+    const apps = data.apps.filter((a) => a._source === storeSource);
+    const featuredList = Array.isArray(data.featured) ? data.featured : [];
+    const featuredApps = apps.filter((a) => featuredList.some((f) => f.id === a.id));
+    const isUrl = store.source.startsWith("http");
+    const sourceLink = isUrl ? store.source : `https://github.com/${store.source}`;
+    const categories = [...new Set(apps.flatMap((a) => a.category || []))];
+    const catNames = categories.map((cid) => {
+      const cat = (data.categories || []).find((c) => c.id === cid);
+      return cat ? cat.name : cid;
+    });
+
+    const storeIcons = (store.icons || []).slice(0, 4);
+    const iconGrid = storeIcons.length > 0
+      ? `<div class="store-detail-icon-grid">${storeIcons.map((ic) =>
+        `<img src="${ic.icon}" class="store-detail-grid-icon" style="${ic.iconStyle && ic.iconStyle.borderRadius ? "border-radius:" + ic.iconStyle.borderRadius : "border-radius:22%"}" onerror="this.style.display='none'">`
+      ).join("")}</div>`
+      : `<div class="store-detail-avatar-letter">${store.name.charAt(0).toUpperCase()}</div>`;
+
+    return `
+      <div class="app-detail">
+        <div class="back-btn" data-action="back-stores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Stores
+        </div>
+
+        <div class="store-detail-header">
+          <div class="store-detail-icon-area">
+            ${iconGrid}
+          </div>
+          <div class="store-detail-title-area">
+            <div class="store-detail-title">${store.name}</div>
+            <div class="store-detail-developer">by ${store.developer}</div>
+            ${featuredApps.length > 0 ? `<div class="store-detail-featured-badge"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Featured Store</div>` : ""}
+            <div class="store-detail-actions">
+              ${store.url ? `<a href="${store.url}" target="_blank" rel="noopener" class="store-card-btn primary">Visit Store</a>` : ""}
+              <a href="${sourceLink}" target="_blank" rel="noopener" class="store-card-btn secondary">${icons.github} View Repo</a>
+              <button class="share-btn" data-action="share" aria-label="Share">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-detail-stats">
+          <div class="stat"><div class="stat-value">${store.appCount}</div><div class="stat-label">Apps</div></div>
+          <div class="stat"><div class="stat-value">${formatNumber(store.totalStars)}</div><div class="stat-label">Stars</div></div>
+          <div class="stat"><div class="stat-value">${categories.length}</div><div class="stat-label">Categories</div></div>
+        </div>
+
+        ${catNames.length > 0 ? `
+        <div class="store-detail-tags">
+          ${catNames.map((n) => `<span class="store-detail-tag">${n}</span>`).join("")}
+        </div>` : ""}
+
+        ${(() => {
+        const allPicks = showcaseData ? (showcaseData.picks || []).filter((p) => apps.some((a) => a.id === p.id)) : [];
+        const showcasePicks = allPicks.sort(() => 0.5 - Math.random()).slice(0, 2);
+        if (showcasePicks.length === 0) return "";
+        return `
+        <div class="detail-section">
+          <div class="section-header">
+            <h3 style="font-size:22px;margin-bottom:0">Showcased</h3>
+          </div>
+          <div class="showcase-picks">
+            ${showcasePicks.map((p) => showcaseCard(p)).join("")}
+          </div>
+        </div>`;
+      })()}
+
+        ${featuredApps.length > 0 ? `
+        <div class="detail-section">
+          <div class="section-header">
+            <h3 style="font-size:22px;margin-bottom:0">Featured</h3>
+          </div>
+          <div class="cards-grid">
+            ${featuredApps.map((a, i) => appCard(a, i)).join("")}
+          </div>
+        </div>` : ""}
+
+        <div class="detail-section">
+          <div class="section-header">
+            <h3 style="font-size:22px;margin-bottom:0">All Apps</h3>
+          </div>
+          <div class="app-list">
+            ${apps.map((a) => appRow(a)).join("")}
+          </div>
+        </div>
       </div>`;
   }
 
   // Router
+  const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
   let suppressHash = false;
 
-  function buildHash(view, appId) {
-    if (appId) return `#/${view}/${appId}`;
-    if (view === "discover") return "#/";
-    return `#/${view}`;
+  function buildPath(view, appId) {
+    if (view === "stores" && appId) {
+      const slug = appId.startsWith("http") ? encodeURIComponent(appId) : appId;
+      return `/stores/${slug}`;
+    }
+    if (appId) return `/${view}/${appId}`;
+    if (view === "discover") return `/`;
+    return `/${view}`;
   }
 
-  function parseHash() {
-    const hash = location.hash.replace(/^#\/?/, "");
-    if (!hash) return { view: "discover", appId: null };
-    const parts = hash.split("/");
+  function parseRoute() {
+    const raw = isLocal ? location.hash.replace(/^#/, "") : location.pathname;
+    const path = raw.replace(/^\//, "");
+    if (!path) return { view: "discover", appId: null };
+    const parts = path.split("/");
+    if (parts[0] === "stores" && parts.length >= 2) {
+      return { view: "stores", appId: decodeURIComponent(parts.slice(1).join("/")) };
+    }
     if (parts.length >= 2) return { view: parts[0], appId: parts[1] };
     return { view: parts[0], appId: null };
   }
 
-  function navigate(view, appId, fromHash) {
+  function parseLegacyHash() {
+    if (isLocal) return null;
+    const hash = location.hash.replace(/^#\/?/, "");
+    if (!hash) return null;
+    const parts = hash.split("/");
+    if (parts[0] === "stores" && parts.length >= 2) {
+      return { view: "stores", appId: decodeURIComponent(parts.slice(1).join("/")) };
+    }
+    if (parts.length >= 2) return { view: parts[0], appId: parts[1] };
+    return { view: parts[0], appId: null };
+  }
+
+  function navigate(view, appId, skipPush) {
     if (carouselTimer) { clearInterval(carouselTimer); carouselTimer = null; }
     const scroll = $("#contentScroll");
     scroll.scrollTop = 0;
@@ -554,7 +1031,20 @@
       return;
     }
 
-    if (appId) {
+    if (view === "request-new") {
+      window.open("https://github.com/f/wvw.dev/issues/new?template=app-request.yml", "_blank");
+      return;
+    }
+
+    if (view === "requests") {
+      currentApp = null;
+      currentView = view;
+      scroll.innerHTML = renderRequests();
+    } else if (view === "stores" && appId) {
+      currentApp = appId;
+      currentView = view;
+      scroll.innerHTML = renderStoreDetail(appId);
+    } else if (appId) {
       currentApp = appId;
       currentView = view;
       scroll.innerHTML = renderAppDetail(appId);
@@ -572,19 +1062,25 @@
       scroll.innerHTML = renderCategory(view);
     }
 
-    if (!fromHash) {
-      suppressHash = true;
-      location.hash = buildHash(currentView, currentApp);
-      suppressHash = false;
+    if (!skipPush) {
+      const path = buildPath(currentView, currentApp);
+      if (isLocal) {
+        suppressHash = true;
+        location.hash = path;
+        suppressHash = false;
+      } else {
+        history.pushState(null, "", path);
+      }
     }
 
     buildSidebar();
     bindEvents();
+    updateMobileTopbar();
   }
 
-  function onHashChange() {
-    if (suppressHash) return;
-    const { view, appId } = parseHash();
+  function onRouteChange() {
+    if (isLocal && suppressHash) return;
+    const { view, appId } = parseRoute();
     navigate(view || "discover", appId || null, true);
   }
 
@@ -640,6 +1136,41 @@
     };
   }
 
+  function showBuyModal(app) {
+    const overlay = $("#modalOverlay");
+    const modal = $("#modal");
+    const url = getBuyUrl(app);
+
+    modal.innerHTML = `
+      <button class="modal-close" data-action="close-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-icon"${iconContainerStyle(app)}>${renderIcon(app)}</div>
+      <h3>${app.name}</h3>
+      <div class="buy-modal-price">${app.price}</div>
+      <p>This is a paid app. You will be redirected to the developer's page to complete your purchase.</p>
+      <div class="buy-modal-link">
+        <a href="${url}" target="_blank" rel="noopener">${url}</a>
+      </div>
+      <div class="modal-actions">
+        <a class="btn-primary buy-modal-btn" href="${url}" target="_blank" rel="noopener">Go to Purchase Page</a>
+      </div>
+      <div class="buy-modal-disclaimer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>wvw.dev does not process payments or receive any commission from this purchase. All transactions occur directly on the developer's platform. Responsibility for the product, pricing, refunds, and support belongs entirely to the app owner.</span>
+      </div>
+    `;
+
+    overlay.style.display = "flex";
+    requestAnimationFrame(() => overlay.classList.add("visible"));
+
+    overlay.onclick = (e) => {
+      if (e.target === overlay || e.target.closest("[data-action='close-modal']")) {
+        closeModal();
+      }
+    };
+  }
+
   function closeModal() {
     const overlay = $("#modalOverlay");
     overlay.classList.remove("visible");
@@ -668,7 +1199,8 @@
       el.addEventListener("click", (e) => {
         if (e.target.closest("[data-action='get']")) return;
         if (e.target.closest("a")) return;
-        navigate(currentView, el.dataset.app);
+        const view = (currentView === "stores" && currentApp) ? "discover" : currentView;
+        navigate(view, el.dataset.app);
       });
     });
 
@@ -680,7 +1212,9 @@
         const appId = btn.dataset.app;
         const app = data.apps.find((a) => a.id === appId);
         if (!app) return;
-        if (app.brew || app.installCommand) {
+        if (isPaidApp(app)) {
+          showBuyModal(app);
+        } else if (app.brew || app.installCommand) {
           showBrewModal(app);
         } else if (app.homepage) {
           window.open(app.homepage, "_blank");
@@ -696,6 +1230,36 @@
       btn.addEventListener("click", () => navigate(currentView));
     });
 
+    $$("[data-action='share']").forEach((btn) => {
+      if (btn.dataset.boundShare) return;
+      btn.dataset.boundShare = "1";
+      btn.addEventListener("click", () => {
+        const url = isLocal
+          ? `https://wvw.dev${buildPath(currentView, currentApp)}`
+          : location.href;
+        if (navigator.share) {
+          navigator.share({ url }).catch(() => { });
+        } else {
+          copyToClipboard(url);
+        }
+      });
+    });
+
+    $$("[data-action='back-stores']").forEach((btn) => {
+      if (btn.dataset.boundBackStores) return;
+      btn.dataset.boundBackStores = "1";
+      btn.addEventListener("click", () => navigate("stores"));
+    });
+
+    $$("[data-store]").forEach((el) => {
+      if (el.dataset.boundStore) return;
+      el.dataset.boundStore = "1";
+      el.addEventListener("click", (e) => {
+        if (e.target.closest("a")) return;
+        navigate("stores", decodeURIComponent(el.dataset.store));
+      });
+    });
+
     $$("[data-copy]").forEach((el) => {
       if (el.dataset.boundCopy) return;
       el.dataset.boundCopy = "1";
@@ -709,6 +1273,7 @@
     });
 
     bindCarousel();
+    bindReviewScroll();
   }
 
   let carouselTimer = null;
@@ -741,6 +1306,63 @@
       carouselTimer = setInterval(() => goTo(current + 1), 5000);
     }
     resetAutoplay();
+
+    let touchStartX = 0;
+    let touchDeltaX = 0;
+    let dragging = false;
+
+    track.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchDeltaX = 0;
+      dragging = true;
+      track.style.transition = "none";
+    }, { passive: true });
+
+    track.addEventListener("touchmove", (e) => {
+      if (!dragging) return;
+      touchDeltaX = e.touches[0].clientX - touchStartX;
+      const offset = -(current * 100) + (touchDeltaX / track.offsetWidth) * 100;
+      track.style.transform = `translateX(${offset}%)`;
+    }, { passive: true });
+
+    track.addEventListener("touchend", () => {
+      if (!dragging) return;
+      dragging = false;
+      track.style.transition = "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)";
+      if (touchDeltaX < -50) goTo(current + 1);
+      else if (touchDeltaX > 50) goTo(current - 1);
+      else goTo(current);
+      resetAutoplay();
+    });
+  }
+
+  function bindReviewScroll() {
+    const wrapper = $(".review-cards-wrapper");
+    if (!wrapper) return;
+    const track = $(".review-cards", wrapper);
+    const leftBtn = $(".review-scroll-left", wrapper);
+    const rightBtn = $(".review-scroll-right", wrapper);
+    if (!track || !leftBtn || !rightBtn) return;
+
+    function updateButtons() {
+      leftBtn.disabled = track.scrollLeft <= 1;
+      rightBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;
+    }
+
+    leftBtn.addEventListener("click", () => {
+      const card = track.querySelector(".review-card");
+      const step = card ? card.offsetWidth + 16 : 300;
+      track.scrollBy({ left: -step, behavior: "smooth" });
+    });
+
+    rightBtn.addEventListener("click", () => {
+      const card = track.querySelector(".review-card");
+      const step = card ? card.offsetWidth + 16 : 300;
+      track.scrollBy({ left: step, behavior: "smooth" });
+    });
+
+    track.addEventListener("scroll", updateButtons, { passive: true });
+    updateButtons();
   }
 
   // Sidebar click
@@ -749,6 +1371,8 @@
       const item = e.target.closest(".nav-item");
       if (!item) return;
       navigate(item.dataset.view);
+      $("#sidebar").classList.remove("open");
+      $("#sidebarOverlay").classList.remove("open");
     });
   }
 
@@ -789,13 +1413,16 @@
   }
 
   let storesData = [];
+  let showcaseData = null;
 
   // Init
   async function init() {
     try {
-      const [appsResp, storesResp] = await Promise.all([
-        fetch("apps.json"),
-        fetch("stores.json").catch(() => null),
+      const cacheBust = Math.floor(Date.now() / 300000);
+      const [appsResp, storesResp, showcaseResp] = await Promise.all([
+        fetch("/apps.json?v=" + cacheBust),
+        fetch("/stores.json?v=" + cacheBust).catch(() => null),
+        fetch("/showcase.json?v=" + cacheBust).catch(() => null),
       ]);
       data = await appsResp.json();
       if (storesResp && storesResp.ok) {
@@ -822,7 +1449,11 @@
             storeMap[key].icons.push({ icon: app.icon, iconStyle: app.iconStyle });
           }
         });
-        storesData = Object.values(storeMap);
+        storesData = Object.values(storeMap)
+          .sort((a, b) => b.appCount - a.appCount || b.totalStars - a.totalStars);
+      }
+      if (showcaseResp && showcaseResp.ok) {
+        showcaseData = await showcaseResp.json();
       }
     } catch {
       $("#contentScroll").innerHTML = `
@@ -835,14 +1466,98 @@
     }
 
     buildSidebar();
-    window.addEventListener("hashchange", onHashChange);
-    const initial = parseHash();
-    navigate(initial.view || "discover", initial.appId || null);
+    window.addEventListener(isLocal ? "hashchange" : "popstate", onRouteChange);
+
+    const legacy = parseLegacyHash();
+    if (legacy) {
+      history.replaceState(null, "", buildPath(legacy.view, legacy.appId));
+      navigate(legacy.view || "discover", legacy.appId || null, true);
+    } else {
+      const initial = parseRoute();
+      navigate(initial.view || "discover", initial.appId || null, true);
+    }
+
     bindSidebar();
     bindSearch();
     bindKeyboard();
     bindThemeToggle();
     bindAbout();
+    bindCommunity();
+    bindMobileMenu();
+    bindDesktopBanner();
+  }
+
+  function updateMobileTopbar() {
+    const menuBtn = $("#mobileMenuBtn");
+    const backBtn = $("#mobileBackBtn");
+    if (!menuBtn || !backBtn) return;
+
+    if (currentApp) {
+      menuBtn.classList.add("hidden");
+      backBtn.classList.remove("hidden");
+    } else {
+      menuBtn.classList.remove("hidden");
+      backBtn.classList.add("hidden");
+    }
+  }
+
+  function bindMobileMenu() {
+    const menuBtn = $("#mobileMenuBtn");
+    const backBtn = $("#mobileBackBtn");
+    const sidebar = $("#sidebar");
+    const overlay = $("#sidebarOverlay");
+    const scroll = $("#contentScroll");
+    if (!menuBtn || !sidebar || !overlay) return;
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("open");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("open");
+    });
+
+    backBtn.addEventListener("click", () => {
+      navigate(currentView);
+    });
+
+    let lastScrollY = 0;
+    let fadeTimer = null;
+    scroll.addEventListener("scroll", () => {
+      const y = scroll.scrollTop;
+      if (y > lastScrollY && y > 60) {
+        menuBtn.classList.add("faded");
+        backBtn.classList.add("faded");
+      } else {
+        menuBtn.classList.remove("faded");
+        backBtn.classList.remove("faded");
+      }
+      lastScrollY = y;
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(() => {
+        menuBtn.classList.remove("faded");
+        backBtn.classList.remove("faded");
+      }, 1500);
+    }, { passive: true });
+  }
+
+  function bindDesktopBanner() {
+    const banner = $("#desktopBanner");
+    if (!banner) return;
+    if (localStorage.getItem("hideBanner")) return;
+    banner.classList.add("visible");
+    const btn = $("#desktopBannerBtn");
+    const close = $("#desktopBannerClose");
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigate("discover", "wvw-desktop");
+    });
+    close.addEventListener("click", () => {
+      banner.classList.remove("visible");
+      localStorage.setItem("hideBanner", "1");
+    });
   }
 
   function bindThemeToggle() {
@@ -865,6 +1580,21 @@
     });
   }
 
+  function bindCommunity() {
+    const toggle = $("#communityToggle");
+    const community = toggle.closest(".sidebar-community");
+    toggle.addEventListener("click", () => {
+      community.classList.toggle("open");
+    });
+    const navRequests = $("#navRequests");
+    navRequests.addEventListener("click", (e) => {
+      e.preventDefault();
+      navigate("requests");
+      $("#sidebar").classList.remove("open");
+      $("#sidebarOverlay").classList.remove("open");
+    });
+  }
+
   function bindAbout() {
     $("#aboutBtn").addEventListener("click", () => {
       const overlay = $("#modalOverlay");
@@ -877,7 +1607,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-          <img src="logo.svg" style="width:48px;height:48px;border-radius:12px">
+          <img src="/logo.png" style="width:64px;height:64px;border-radius:16px">
           <div>
             <h3 style="margin:0">World Vibe Web</h3>
             <div style="font-size:13px;color:var(--text-secondary)">The distributed app store</div>

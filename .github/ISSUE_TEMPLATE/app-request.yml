@@ -1,0 +1,55 @@
+name: "Request an App"
+description: "Wish an app existed? Describe it and maybe someone will vibecode it."
+title: "[request]: "
+labels: ["app-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea for an app that should exist? Describe what you need and the community might build it.
+
+  - type: input
+    id: app-idea
+    attributes:
+      label: What app do you wish existed?
+      placeholder: "e.g. A menu bar app that shows my GitHub notifications"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe what it should do
+      placeholder: "What problem does it solve? What would it look like? What platform should it run on?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: What platform?
+      options:
+        - macOS
+        - Web
+        - CLI
+        - Mobile
+        - Cross-platform
+        - Don't mind
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Any references or inspiration?
+      placeholder: "Links to similar tools, screenshots, mockups, or apps on other platforms that do something close"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Expectations
+      options:
+        - label: I understand this is a community wish — there's no guarantee someone will build it
+          required: true
+        - label: I'd be happy if the resulting app is open source and vibe-coded
+          required: true

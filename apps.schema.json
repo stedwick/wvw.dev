@@ -60,7 +60,8 @@
         "objectFit": { "type": "string", "enum": ["cover", "contain", "fill"], "description": "CSS object-fit for the icon image." },
         "borderRadius": { "type": "string", "description": "CSS border-radius for the icon container (e.g. '22%')." },
         "bgColor": { "type": "string", "description": "Background color for the icon container (e.g. '#000000')." },
-        "padding": { "type": "string", "description": "CSS padding inside the icon container (e.g. '18%')." }
+        "padding": { "type": "string", "description": "CSS padding inside the icon container (e.g. '18%')." },
+        "objectPosition": { "type": "string", "description": "CSS object-position to focus a specific area of the icon (e.g. 'top', '30% 20%', 'center right')." }
       }
     },
     "app": {
@@ -91,6 +92,7 @@
         "brew": { "type": "string", "description": "Homebrew install command. Triggers the install modal." },
         "installCommand": { "type": "string", "description": "Alternative install command (e.g. 'npx my-app'). Triggers the install modal." },
         "downloadUrl": { "type": "string", "format": "uri", "description": "Direct download URL (e.g. GitHub Releases latest). Shown as secondary button in install modal." },
+        "buyUrl": { "type": "string", "format": "uri", "description": "Purchase URL for paid apps. When price is not 'Free', a Buy button links here. If omitted, falls back to homepage or github." },
         "requirements": { "type": "string", "description": "System requirements (e.g. 'macOS 15 Sequoia or later')." },
         "features": {
           "type": "array",
@@ -101,6 +103,36 @@
           "type": "array",
           "items": { "type": "string", "format": "uri" },
           "description": "Screenshot URLs shown in the detail page preview section."
+        },
+        "_comments": {
+          "type": "array",
+          "description": "Auto-populated by build.sh from GitHub Issues API. Not meant to be set manually.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "user": { "type": "string", "description": "GitHub username of the issue author." },
+              "avatar": { "type": "string", "format": "uri", "description": "Avatar URL of the issue author." },
+              "title": { "type": "string", "description": "Issue title, shown as review title." },
+              "body": { "type": "string", "description": "Issue body (truncated to 300 chars)." },
+              "url": { "type": "string", "format": "uri", "description": "Link to the GitHub issue." },
+              "created_at": { "type": "string", "format": "date-time", "description": "ISO 8601 timestamp." },
+              "reactions": {
+                "type": "object",
+                "description": "Reaction emoji counts from the issue.",
+                "properties": {
+                  "total": { "type": "integer" },
+                  "thumbsUp": { "type": "integer" },
+                  "thumbsDown": { "type": "integer" },
+                  "laugh": { "type": "integer" },
+                  "hooray": { "type": "integer" },
+                  "confused": { "type": "integer" },
+                  "heart": { "type": "integer" },
+                  "rocket": { "type": "integer" },
+                  "eyes": { "type": "integer" }
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -1,26 +1,26 @@
 [
   {
-    "id": "dodopulse",
-    "headline": "FROM DODOAPPS",
-    "title": "Your Mac, at a glance.",
-    "subtitle": "Real-time CPU, memory, GPU, and network monitoring in your menu bar — with beautiful mini graphs."
-  },
-  {
-    "id": "textream",
-    "headline": "NEW APP",
-    "title": "Your script, always in sight.",
-    "subtitle": "Textream brings a Dynamic Island teleprompter to your Mac — highlighting words as you speak them."
-  },
-  {
-    "id": "prompts-chat",
-    "headline": "151K+ STARS",
-    "title": "The world's largest prompt collection.",
-    "subtitle": "Share, discover, and collect AI prompts from the community. Free, open source, and self-hostable."
-  },
-  {
     "id": "dodoshot",
-    "headline": "FREE ALTERNATIVE",
-    "title": "Screenshots, reimagined.",
-    "subtitle": "A beautiful, free screenshot tool for macOS — capture, annotate, and manage. Inspired by CleanShot X."
+    "headline": "STAFF PICK",
+    "title": "CleanShot X vibes, zero price tag.",
+    "subtitle": "DodoShot is a polished, fully free macOS screenshot app with capture, annotation, and management built in. Open source and inspired by the best — because great tools shouldn't cost a thing."
+  },
+  {
+    "id": "nodepad",
+    "headline": "EDITOR'S PICK",
+    "title": "Think in graphs, not threads.",
+    "subtitle": "NodePad turns every AI exchange into a node on an infinite canvas, letting you branch, merge, and explore conversations like a mind map. For thinkers who've outgrown the chat box."
+  },
+  {
+    "id": "agentlytics",
+    "headline": "MUST TRY",
+    "title": "One dashboard for every AI coding tool you use.",
+    "subtitle": "Agentlytics unifies your Cursor, Windsurf, Claude Code, and Copilot history into a single analytics view — heatmaps, streaks, token economy, and session search, all in one command."
+  },
+  {
+    "id": "portier",
+    "headline": "HIDDEN GEM",
+    "title": "Know exactly what's running on your Mac.",
+    "subtitle": "Portier sits in your menu bar and shows every active port and the process behind it, organized by category. Kill rogue processes, open dev servers in a click, and never be surprised by a busy port again."
   }
 ]

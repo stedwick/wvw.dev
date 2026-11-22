@@ -176,6 +176,7 @@ macOS app icons from Xcode have padding baked in. SVG logos may not fill the con
 |----------|------|---------|----------|
 | `scale` | number | `1.3` | Zoom in on macOS icons with built-in padding |
 | `objectFit` | string | `"cover"` or `"contain"` | `cover` for full-bleed icons, `contain` for logos |
+| `objectPosition` | string | `"top"` or `"30% 20%"` | Focus/crop a specific area of the icon |
 | `borderRadius` | string | `"22%"` | Match macOS icon shape (squircle) |
 | `bgColor` | string | `"#000000"` | Background for transparent SVG logos |
 | `padding` | string | `"18%"` | Inset padding for wide logos |
@@ -185,6 +186,9 @@ macOS app icons from Xcode have padding baked in. SVG logos may not fill the con
 ```jsonc
 // macOS app icon (Xcode .appiconset PNG with padding)
 "iconStyle": { "scale": 1.3, "objectFit": "cover", "borderRadius": "22%" }
+
+// Focus on the top portion of a tall icon
+"iconStyle": { "objectFit": "cover", "objectPosition": "top" }
 
 // SVG logo on dark background
 "iconStyle": { "objectFit": "contain", "bgColor": "#000000" }
@@ -233,6 +237,8 @@ Only the following category IDs are recognized by WVW. Apps with unrecognized ca
 | ID | Display Name |
 |----|-------------|
 | `macos` | macOS Apps |
+| `ios` | iOS Apps |
+| `android` | Android Apps |
 | `web` | Web Apps |
 | `cli` | CLI Apps |
 | `developer-tools` | Developer Tools |
@@ -262,17 +268,54 @@ Only the following category IDs are recognized by WVW. Apps with unrecognized ca
 
 The canonical source is [`categories.json`](categories.json).
 
-## Let Your AI Agent Do It
+## Generate Your apps.json
 
-You don't need to write `apps.json` by hand. Just give this document to your AI coding agent (Cursor, Claude Code, Windsurf, Copilot, etc.) and ask it to:
+You don't need to write `apps.json` by hand. Use the **[WVW apps.json Generator](https://findutils.com/en/tools/wvw-apps-json-generator/)** — a web tool that walks you through creating a valid `apps.json` with a form-based UI. Fill in your app details, pick categories, and download the ready-to-commit file.
 
-> "Create an apps.json for my GitHub repos following this spec."
+### Install the WVW Agent Skill
 
-The agent will read the schema, look up your repos, fetch descriptions and icons, and generate a valid `apps.json` ready to commit. You can also ask it to:
+Install the WVW skill into your AI agent with one command:
 
-- Clone Appétit and set up a standalone store for you
-- Open a PR to `stores.json` on `f/wvw.dev` to list your apps
-- Run `update-stats.sh` to refresh star counts
+```bash
+npx skills add f/wvw.dev
+```
+
+This installs the `wvw-apps-json` skill into your agent (Cursor, Claude Code, Copilot, Windsurf, Codex, and 40+ others). Once installed, just ask your agent:
+
+> "Create an apps.json for my GitHub repos following the WVW spec."
+
+The agent will use the skill to read the schema, look up your repos, fetch descriptions and icons, and generate a valid `apps.json` ready to commit.
+
+### MCP Server
+
+WVW also ships an MCP server that gives your agent tools for generating and validating `apps.json` files:
+
+```bash
+npx wvw-mcp
+```
+
+Add it to your agent's MCP config (`.mcp.json`, Claude Code settings, etc.):
+
+```json
+{
+  "mcpServers": {
+    "wvw": {
+      "command": "npx",
+      "args": ["-y", "wvw-mcp"]
+    }
+  }
+}
+```
+
+The MCP server provides:
+- **`generate_app_entry`** — create an app entry from a GitHub URL
+- **`validate_apps_json`** — check your file for errors and get suggestions
+- **`get_allowed_categories`** — list valid category IDs
+- **`generate_store_metadata`** — scaffold store info from a GitHub username
+
+### Or Just Ask Your Agent
+
+You can also give this document directly to your agent (Cursor, Claude Code, Windsurf, Copilot, etc.) and ask it to generate the file. The agent will read the schema and produce a valid `apps.json`.
 
 This entire project — Appétit and World Vibe Web — was built with agentic engineering. Your `apps.json` can be too.
 
@@ -281,6 +324,7 @@ This entire project — Appétit and World Vibe Web — was built with agentic e
 - **Use the schema.** Add `"$schema": "https://wvw.dev/apps.schema.json"` to the top of your `apps.json` for editor validation and autocomplete.
 - **Keep IDs unique.** Your app `id` values must be globally unique across all stores. Use your project name in kebab-case (e.g. `my-cool-tool`).
 - **Host icons on GitHub.** Use raw.githubusercontent.com URLs so they're always available. For Xcode projects, link to the `.appiconset/icon_512x512.png` file.
+- **No icon? No problem.** If your app doesn't have an `icon` URL, WVW will automatically generate a skeuomorphic app icon for you using [fal.ai](https://fal.ai) and Google's Nano Banana model. The generated icon is cached in the WVW repo and served via GitHub CDN. You can always replace it later by adding your own `icon` URL.
 - **Add screenshots.** Apps with screenshots look significantly better in the detail view. Put them in your repo's `docs/` folder.
 - **Don't worry about stars/forks.** WVW fetches them live from the GitHub API during every build. Any values you declare are overwritten.
 - **Test locally.** Clone Appétit, replace the `apps.json`, and serve with `python3 -m http.server` to preview your store before submitting.
