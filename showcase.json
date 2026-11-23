@@ -1,6 +1,22 @@
 {
-  "generated_at": "2026-11-16T09:01:35Z",
+  "generated_at": "2026-11-23T20:49:03Z",
   "highlights": [
+    {
+      "id": "agentlytics",
+      "name": "Agentlytics",
+      "subtitle": "AI Coding Agent Analytics",
+      "icon": "https://raw.githubusercontent.com/f/agentlytics/master/docs/logo.svg",
+      "iconStyle": {
+        "scale": 0.9,
+        "objectFit": "contain",
+        "bgColor": "#000000"
+      },
+      "iconEmoji": null,
+      "screenshot": "https://raw.githubusercontent.com/f/agentlytics/master/docs/screenshot.png",
+      "category": "cli",
+      "platform": "Node.js",
+      "stars": 598
+    },
     {
       "id": "ha-bluetooth-audio-manager",
       "name": "Bluetooth Audio Manager",
@@ -11,28 +27,28 @@
       "screenshot": "https://github.com/user-attachments/assets/a1dd24b9-9f99-4049-80fc-918e3a5f8909",
       "category": "music",
       "platform": "Docker",
-      "stars": 83,
+      "stars": 84,
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/ha-bluetooth-audio-manager.jpg"
-    },
-    {
-      "id": "wallnetic",
-      "name": "Wallnetic",
-      "subtitle": "Live Video Wallpapers for Mac",
-      "icon": "https://raw.githubusercontent.com/fatihkan/wallnetic/main/docs/assets/icon.png",
-      "iconStyle": {
-        "scale": 1.3,
-        "objectFit": "cover",
-        "borderRadius": "22%"
-      },
-      "iconEmoji": "🌊",
-      "screenshot": "https://raw.githubusercontent.com/fatihkan/wallnetic/main/docs/assets/1.png",
-      "category": "photo-video",
-      "platform": "macOS",
-      "stars": 78,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/wallnetic.jpg"
     }
   ],
   "picks": [
+    {
+      "id": "dev-cleaner",
+      "name": "Dev Cleaner",
+      "subtitle": "Workspace health dashboard",
+      "icon": "https://raw.githubusercontent.com/Tolsion/DevCleaner/main/assets/dev_clean_color.png",
+      "iconStyle": {
+        "scale": 1.1,
+        "objectFit": "cover",
+        "borderRadius": "22%"
+      },
+      "iconEmoji": "🧹",
+      "screenshot": null,
+      "category": "macos",
+      "platform": "macOS",
+      "stars": 2,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/dev-cleaner.jpg"
+    },
     {
       "id": "dodoshot",
       "name": "DodoShot",
@@ -51,17 +67,19 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/dodoshot.jpg"
     },
     {
-      "id": "podcast-ad-remover",
-      "name": "Podcast Ad Remover",
-      "subtitle": "AI-powered ad detection and removal",
-      "icon": "https://raw.githubusercontent.com/akeslo/podcast-ad-remover/master/app/web/static/favicon.png",
-      "iconStyle": null,
-      "iconEmoji": "🎙️",
+      "id": "seasons-solstice-tracker",
+      "name": "Seasons: Solstice Tracker",
+      "subtitle": "Moon, Progress & Widgets",
+      "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/03/a0/bb/03a0bb0a-e3e9-b128-17cf-cc4372f0bdd5/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+      "iconStyle": {
+        "borderRadius": "22%"
+      },
+      "iconEmoji": "🌗",
       "screenshot": null,
-      "category": "macos",
-      "platform": "Python",
+      "category": "ios",
+      "platform": "iOS",
       "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/podcast-ad-remover.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/seasons-solstice-tracker.jpg"
     },
     {
       "id": "glow-spin",
@@ -77,19 +95,6 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/glow-spin.jpg"
     },
     {
-      "id": "swipe-slip",
-      "name": "Swipe Slip",
-      "subtitle": "Tunnel Runner Game",
-      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/swipeslip-512.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "ios",
-      "platform": "iOS & Android",
-      "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/swipe-slip.jpg"
-    },
-    {
       "id": "glow-spin",
       "name": "Glow Spin",
       "subtitle": "Rhythm Reflex Game",
@@ -103,42 +108,87 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/glow-spin.jpg"
     },
     {
-      "id": "moodjot",
-      "name": "MoodJot",
-      "subtitle": "Mood Tracker Journal",
-      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/moodjot-512.png",
+      "id": "gridzle",
+      "name": "Gridzle",
+      "subtitle": "Counts-First Puzzle Strategy",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/gridzle-512.png",
       "iconStyle": null,
-      "iconEmoji": null,
+      "iconEmoji": "🧩",
       "screenshot": null,
       "category": "android",
       "platform": "iOS & Android",
       "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/moodjot.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/gridzle.jpg"
     },
     {
-      "id": "council-of-steves",
-      "name": "Council of Steves",
-      "subtitle": "Every gull is Steve",
-      "icon": "https://presque.cool/council-of-steves/icons/icon-512.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "web",
-      "platform": "Web",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/council-of-steves.jpg"
-    },
-    {
-      "id": "findutils-3d-model-viewer",
-      "name": "3D Model Viewer",
-      "subtitle": "View and inspect GLTF and GLB 3D models directly in your browser.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/3d-model-viewer.svg",
+      "id": "findutils-grade-calculator",
+      "name": "Grade Calculator",
+      "subtitle": "Calculate your weighted grades and final exam scores online.",
+      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/grade-calculator.svg",
       "iconStyle": null,
       "iconEmoji": null,
       "screenshot": null,
       "category": "web",
       "platform": "Web",
       "stars": 2
+    },
+    {
+      "id": "findutils-hash-comparison-tool",
+      "name": "Hash Comparison Tool",
+      "subtitle": "Compare a file or text against a known hash to verify its integrity.",
+      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/hash-comparison-tool.svg",
+      "iconStyle": null,
+      "iconEmoji": null,
+      "screenshot": null,
+      "category": "web",
+      "platform": "Web",
+      "stars": 2
+    },
+    {
+      "id": "agentlytics",
+      "name": "Agentlytics",
+      "subtitle": "AI Coding Agent Analytics",
+      "icon": "https://raw.githubusercontent.com/f/agentlytics/master/docs/logo.svg",
+      "iconStyle": {
+        "scale": 0.9,
+        "objectFit": "contain",
+        "bgColor": "#000000"
+      },
+      "iconEmoji": null,
+      "screenshot": "https://raw.githubusercontent.com/f/agentlytics/master/docs/screenshot.png",
+      "category": "cli",
+      "platform": "Node.js",
+      "stars": 598
+    },
+    {
+      "id": "poke-tui",
+      "name": "Poke TUI",
+      "subtitle": "Terminal Chat for Poke AI",
+      "icon": null,
+      "iconStyle": {},
+      "iconEmoji": "🌴",
+      "screenshot": null,
+      "category": "cli",
+      "platform": "Node.js",
+      "stars": 16,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/poke-tui.jpg"
+    },
+    {
+      "id": "terminal-alias-manager",
+      "name": "Terminal Alias Manager",
+      "subtitle": "Manage your shell aliases visually",
+      "icon": "https://raw.githubusercontent.com/efekurucay/tam-cli/main/AliasManager/Assets.xcassets/AppIcon.appiconset/512-mac.png",
+      "iconStyle": {
+        "scale": 1.3,
+        "objectFit": "cover",
+        "borderRadius": "22%"
+      },
+      "iconEmoji": "⌨️",
+      "screenshot": "https://raw.githubusercontent.com/efekurucay/tam-cli/main/docs/ss.png",
+      "category": "developer-tools",
+      "platform": "macOS",
+      "stars": 6,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/terminal-alias-manager.jpg"
     },
     {
       "id": "asc-cli",
@@ -152,81 +202,46 @@
       },
       "iconEmoji": null,
       "screenshot": null,
-      "category": "cli",
+      "category": "developer-tools",
       "platform": "macOS",
-      "stars": 398,
+      "stars": 402,
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/asc-cli.jpg"
     },
     {
-      "id": "pscan",
-      "name": "pscan",
-      "subtitle": "Monitor and manage your localhost ports",
-      "icon": "https://raw.githubusercontent.com/mavideniz/pscan/main/icon.png",
+      "id": "radioheavy-wiro-cli",
+      "name": "Wiro CLI",
+      "subtitle": "Terminal client for discovering models, running tasks, and watching progress on Wiro AI",
+      "icon": null,
+      "iconStyle": null,
+      "iconEmoji": "⌘",
+      "screenshot": null,
+      "category": "productivity",
+      "platform": "CLI",
+      "stars": 0,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/radioheavy-wiro-cli.jpg"
+    },
+    {
+      "id": "shelf",
+      "name": "Shelf",
+      "subtitle": "Multiple Floating Docks for macOS",
+      "icon": "https://raw.githubusercontent.com/f/shelf/master/Shelf/Assets.xcassets/AppIcon.appiconset/icon_512x512.png",
       "iconStyle": {
         "scale": 1.3,
         "objectFit": "cover",
         "borderRadius": "22%"
       },
       "iconEmoji": null,
-      "screenshot": "https://raw.githubusercontent.com/mavideniz/pscan/main/screenshot.png",
-      "category": "cli",
+      "screenshot": null,
+      "category": "productivity",
       "platform": "macOS",
-      "stars": 39,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/pscan.jpg"
+      "stars": 32,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/shelf.jpg"
     },
     {
-      "id": "findutils-password-breach-checker",
-      "name": "Password Breach Checker",
-      "subtitle": "Check if a password appears in known data breaches.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/password-breach-checker.svg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "developer-tools",
-      "platform": "Web",
-      "stars": 2
-    },
-    {
-      "id": "findutils-privacy-policy-checker",
-      "name": "Privacy Policy Checker",
-      "subtitle": "Analyze privacy policies for data collection practices, user rights, security...",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/privacy-policy-checker.svg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "developer-tools",
-      "platform": "Web",
-      "stars": 2
-    },
-    {
-      "id": "findutils-mind-map-maker",
-      "name": "Mind Map Maker",
-      "subtitle": "Create beautiful mind maps with AI brainstorming, multiple sessions, 3 node t...",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/mind-map-maker.svg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "productivity",
-      "platform": "Web",
-      "stars": 2
-    },
-    {
-      "id": "findutils-slide-deck-builder",
-      "name": "Slide Deck Builder",
-      "subtitle": "Create stunning presentations with our online slide deck builder.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/slide-deck-builder.svg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "productivity",
-      "platform": "Web",
-      "stars": 2
-    },
-    {
-      "id": "findutils-fire-calculator",
-      "name": "FIRE Calculator",
-      "subtitle": "Calculate your FIRE number for Financial Independence, Retire Early.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/fire-calculator.svg",
+      "id": "findutils-purchase-order-generator",
+      "name": "Purchase Order Generator",
+      "subtitle": "Create professional purchase orders instantly.",
+      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/purchase-order-generator.svg",
       "iconStyle": null,
       "iconEmoji": null,
       "screenshot": null,
@@ -235,16 +250,32 @@
       "stars": 2
     },
     {
-      "id": "findutils-grade-calculator",
-      "name": "Grade Calculator",
-      "subtitle": "Calculate your weighted grades and final exam scores online.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/grade-calculator.svg",
+      "id": "findutils-reading-time-estimator",
+      "name": "Reading Time Estimator",
+      "subtitle": "Estimate reading and speaking time at a slow, average or fast pace: 150, 200 ...",
+      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/reading-time-estimator.svg",
       "iconStyle": null,
       "iconEmoji": null,
       "screenshot": null,
       "category": "utilities",
       "platform": "Web",
       "stars": 2
+    },
+    {
+      "id": "kpss",
+      "name": "KPSS Deneme Sınavları",
+      "subtitle": "KPSS 2025 Hazırlık & Güncel Bilgiler",
+      "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e5/0a/b7/e50ab702-fa37-c0a9-3a19-eaf40ab341bc/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+      "iconStyle": {
+        "objectFit": "cover",
+        "borderRadius": "22%"
+      },
+      "iconEmoji": null,
+      "screenshot": null,
+      "category": "education",
+      "platform": "iOS & Android",
+      "stars": 0,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/kpss.jpg"
     },
     {
       "id": "tarih",
@@ -263,72 +294,58 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/tarih.jpg"
     },
     {
-      "id": "ehliyet",
-      "name": "Ehliyet Sınav Soruları",
-      "subtitle": "Sürücü Belgesi Sınavı Hazırlık",
-      "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/03/2a/f6/032af692-9463-dc94-a4df-386172446451/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+      "id": "coldcase",
+      "name": "ColdCase",
+      "subtitle": "Online Detective Game",
+      "icon": "https://osmankoc.dev/images/projects/coldcase-app.png",
+      "iconStyle": null,
+      "iconEmoji": null,
+      "screenshot": null,
+      "category": "entertainment",
+      "platform": "iOS & Android",
+      "stars": 0,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/coldcase.jpg"
+    },
+    {
+      "id": "gridzle",
+      "name": "Gridzle",
+      "subtitle": "Counts-First Puzzle Strategy",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/gridzle-512.png",
+      "iconStyle": null,
+      "iconEmoji": "🧩",
+      "screenshot": null,
+      "category": "entertainment",
+      "platform": "iOS & Android",
+      "stars": 1,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/gridzle.jpg"
+    },
+    {
+      "id": "pixel-guess-game",
+      "name": "Pixel Guess",
+      "subtitle": "Guess the character behind the pixels",
+      "icon": "https://raw.githubusercontent.com/Jubstaaa/pixel-guess/main/apps/mobile/assets/icon.png",
       "iconStyle": {
-        "objectFit": "cover",
         "borderRadius": "22%"
       },
       "iconEmoji": null,
-      "screenshot": null,
-      "category": "education",
-      "platform": "iOS & Android",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/ehliyet.jpg"
-    },
-    {
-      "id": "glow-spin",
-      "name": "Glow Spin",
-      "subtitle": "Rhythm Reflex Game",
-      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/glowspin-512.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "entertainment",
-      "platform": "iOS & Android",
-      "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/glow-spin.jpg"
-    },
-    {
-      "id": "orbital-drift",
-      "name": "Orbital Drift",
-      "subtitle": "Sci-fi landscapes with ambient radio",
-      "icon": "https://presque.cool/orbital-drift/icons/icon-512.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "entertainment",
-      "platform": "Web",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/orbital-drift.jpg"
-    },
-    {
-      "id": "nexus",
-      "name": "Nexus",
-      "subtitle": "Path-building strategy game for two",
-      "icon": "https://presque.cool/nexus/icons/icon-512.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
+      "screenshot": "https://ilkerbalcilar.com/images/projects/pixel-guess-game/cover.webp",
       "category": "games",
       "platform": "Web",
       "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/nexus.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/pixel-guess-game.jpg"
     },
     {
-      "id": "swipe-slip",
-      "name": "Swipe Slip",
-      "subtitle": "Tunnel Runner Game",
-      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/swipeslip-512.png",
+      "id": "agent-chess",
+      "name": "Agent Chess",
+      "subtitle": "Local chess matches for AI agents",
+      "icon": "https://raw.githubusercontent.com/shametim/agent-chess/main/logo.png",
       "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
+      "iconEmoji": "♟️",
+      "screenshot": "https://raw.githubusercontent.com/shametim/agent-chess/main/docs/agent-chess-cli.png",
       "category": "games",
-      "platform": "iOS & Android",
-      "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/swipe-slip.jpg"
+      "platform": "Node.js",
+      "stars": 0,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/agent-chess.jpg"
     },
     {
       "id": "ha-bluetooth-audio-manager",
@@ -340,7 +357,7 @@
       "screenshot": "https://github.com/user-attachments/assets/a1dd24b9-9f99-4049-80fc-918e3a5f8909",
       "category": "music",
       "platform": "Docker",
-      "stars": 83,
+      "stars": 84,
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/ha-bluetooth-audio-manager.jpg"
     },
     {
@@ -355,6 +372,19 @@
       "platform": "Web",
       "stars": 0,
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/soundshift.jpg"
+    },
+    {
+      "id": "vynix",
+      "name": "Vynix",
+      "subtitle": "AI Studio",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/vynix-512.png",
+      "iconStyle": null,
+      "iconEmoji": null,
+      "screenshot": null,
+      "category": "photo-video",
+      "platform": "iOS & Android",
+      "stars": 1,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/vynix.jpg"
     },
     {
       "id": "wallnetic",
@@ -374,111 +404,84 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/wallnetic.jpg"
     },
     {
-      "id": "radioheavy-captioneer",
-      "name": "Captioneer",
-      "subtitle": "On-device live captions, translation, and OBS-ready overlays for macOS",
-      "icon": "https://raw.githubusercontent.com/radioheavy/captioneer/master/CaptioneerStandalone/Captioneer/Assets.xcassets/AppIcon.appiconset/icon_512x512.png",
-      "iconStyle": {
-        "scale": 1.3,
-        "objectFit": "cover",
-        "borderRadius": "22%"
-      },
-      "iconEmoji": "💬",
+      "id": "caravan-of-sidonia",
+      "name": "Caravan of Sidonia",
+      "subtitle": "Procedural parallax landscape generator",
+      "icon": "https://presque.cool/caravan-of-sidonia/icons/icon-512.png",
+      "iconStyle": null,
+      "iconEmoji": null,
       "screenshot": null,
-      "category": "photo-video",
-      "platform": "macOS",
-      "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/radioheavy-captioneer.jpg"
+      "category": "graphics-design",
+      "platform": "Web",
+      "stars": 0,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/caravan-of-sidonia.jpg"
     },
     {
-      "id": "ai2image",
-      "name": "AI2image",
-      "subtitle": "AI image generation platform",
+      "id": "findutils-color-blindness-simulator",
+      "name": "Color Blindness Simulator",
+      "subtitle": "See a palette or a screenshot the way protanopia, deuteranopia, tritanopia an...",
       "icon": null,
       "iconStyle": null,
       "iconEmoji": "🎨",
       "screenshot": null,
       "category": "graphics-design",
       "platform": "Web",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/ai2image.jpg"
-    },
-    {
-      "id": "findutils-box-shadow-generator",
-      "name": "CSS Box Shadow Generator",
-      "subtitle": "Generate CSS box shadows visually with live preview.",
-      "icon": "https://raw.githubusercontent.com/olgunozoktas/findutils-tools/main/images/wvw-icons/box-shadow-generator.svg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "graphics-design",
-      "platform": "Web",
       "stars": 2
     },
     {
-      "id": "poker-tracker",
-      "name": "Poker Tracker",
-      "subtitle": "Track your live poker PnL with a simple web app",
-      "icon": "https://pokertracker-23081.web.app/logo192-masked.png",
+      "id": "my-net-worth",
+      "name": "My Net Worth",
+      "subtitle": "All your stocks, ETFs, crypto wallets, 401(k), on one page",
+      "icon": "https://mynetworthone.com/icon-full.png",
       "iconStyle": null,
       "iconEmoji": null,
-      "screenshot": "https://raw.githubusercontent.com/stedwick/wvw.dev.apps/main/screenshots/poker-tracker.png",
-      "category": "finance",
-      "platform": "Web",
-      "stars": 1,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/poker-tracker.jpg"
-    },
-    {
-      "id": "bridge-your-budget",
-      "name": "Bridge Your Budget",
-      "subtitle": "Auto-sync Amazon purchases to YNAB",
-      "icon": null,
-      "iconStyle": null,
-      "iconEmoji": "💰",
-      "screenshot": null,
+      "screenshot": "https://mynetworthone.com/full-screenshot-light.png",
       "category": "finance",
       "platform": "Web",
       "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/bridge-your-budget.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/my-net-worth.jpg"
     },
     {
-      "id": "en-yakin-eczane-bot",
-      "name": "En Yakın Eczaneyi Bul",
-      "subtitle": "Nearest Pharmacy Finder — Telegram Bot",
-      "icon": "https://osmankoc.dev/images/projects/en-yakin-eczaneyi-bul-logo.jpg",
+      "id": "paus",
+      "name": "paus",
+      "subtitle": "Think before you spend by seeing prices in work hours.",
+      "icon": "https://raw.githubusercontent.com/mustafademiray/pausapp/main/paus_logo.png",
       "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "health-fitness",
-      "platform": "Telegram",
-      "stars": 4,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/en-yakin-eczane-bot.jpg"
-    },
-    {
-      "id": "en-yakin-hastane-bot",
-      "name": "En Yakın Hastaneyi Bul",
-      "subtitle": "Nearest Hospital Finder — Telegram Bot",
-      "icon": "https://osmankoc.dev/images/projects/en-yakin-hastaneyi-bul-logo.jpg",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": null,
-      "category": "health-fitness",
-      "platform": "Telegram",
+      "iconEmoji": "⏸️",
+      "screenshot": "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_1.png",
+      "category": "finance",
+      "platform": "iOS",
       "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/en-yakin-hastane-bot.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/paus.jpg"
     },
     {
-      "id": "prayer-times",
-      "name": "Prayer Times & Qibla",
-      "subtitle": "Namaz Vakitleri, Kıble & Kuran",
-      "icon": null,
-      "iconStyle": {},
-      "iconEmoji": "🕌",
+      "id": "whistle-sos",
+      "name": "Whistle SOS",
+      "subtitle": "Emergency Whistle for Earthquake Situations",
+      "icon": "https://play-lh.googleusercontent.com/RA5xl79ALrLWIL8SptFCc6UQIN-iVdf-Y5d0KsNsUI0H3Yn4MwOHf6WgB4K7n6mAGMA=w240-h480-rw",
+      "iconStyle": {
+        "objectFit": "cover",
+        "borderRadius": "22%"
+      },
+      "iconEmoji": null,
       "screenshot": null,
-      "category": "lifestyle",
+      "category": "health-fitness",
       "platform": "iOS & Android",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/prayer-times.jpg"
+      "stars": 3,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/whistle-sos.jpg"
+    },
+    {
+      "id": "astralpost",
+      "name": "AstralPost",
+      "subtitle": "The Universe Is Listening",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/astralpost-512.png",
+      "iconStyle": null,
+      "iconEmoji": "✨",
+      "screenshot": null,
+      "category": "health-fitness",
+      "platform": "iOS & Android",
+      "stars": 1,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/astralpost.jpg"
     },
     {
       "id": "bitki-sulama",
@@ -497,6 +500,19 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/bitki-sulama.jpg"
     },
     {
+      "id": "moodjot",
+      "name": "MoodJot",
+      "subtitle": "Mood Tracker Journal",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/moodjot-512.png",
+      "iconStyle": null,
+      "iconEmoji": null,
+      "screenshot": null,
+      "category": "lifestyle",
+      "platform": "iOS & Android",
+      "stars": 1,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/moodjot.jpg"
+    },
+    {
       "id": "worldmonitor",
       "name": "World Monitor",
       "subtitle": "AI-Powered Global Intelligence Dashboard",
@@ -510,30 +526,30 @@
       "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/worldmonitor.jpg"
     },
     {
-      "id": "reviseflow",
-      "name": "ReviseFlow",
-      "subtitle": "Client feedback, zero back-and-forth",
-      "icon": "https://reviseflow.io/icon.png",
-      "iconStyle": null,
-      "iconEmoji": null,
-      "screenshot": "https://reviseflow.io/screenshots/reviseflow-ai-linkedin.png",
-      "category": "business",
-      "platform": "Web",
-      "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/reviseflow.jpg"
-    },
-    {
-      "id": "cre-flyer-maker",
-      "name": "CRE Flyer Maker",
-      "subtitle": "Flyer maker for CRE brokers",
-      "icon": null,
+      "id": "hivedue",
+      "name": "HiveDue",
+      "subtitle": "Community Finance Management",
+      "icon": "https://buhane.ams3.cdn.digitaloceanspaces.com/vynix/icons/hivedue-512.png",
       "iconStyle": null,
       "iconEmoji": "🏢",
       "screenshot": null,
       "category": "business",
-      "platform": "iOS",
+      "platform": "Web",
+      "stars": 1,
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/hivedue.jpg"
+    },
+    {
+      "id": "ai2sql",
+      "name": "AI2SQL",
+      "subtitle": "Generate SQL queries with AI",
+      "icon": null,
+      "iconStyle": null,
+      "iconEmoji": "🗄️",
+      "screenshot": null,
+      "category": "business",
+      "platform": "Web",
       "stars": 0,
-      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/cre-flyer-maker.jpg"
+      "showcase_image": "https://raw.githubusercontent.com/f/wvw.dev/master/assets/showcase/ai2sql.jpg"
     },
     {
       "id": "marvel-archive",
